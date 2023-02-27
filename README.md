@@ -8,3 +8,13 @@ __Запуск__
 pip install -r requirements.txt
 python3 task1.py
 ```
+
+### Task 2
+__tokens.txt__ - файл с токенами \
+__lemma_tokens.txt__ - файл с леммами
+
+__Запуск__
+```bash
+pip install -r requirements.txt
+python3 task2.py
+```
