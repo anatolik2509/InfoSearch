@@ -18,3 +18,11 @@ __Запуск__
 pip install -r requirements.txt
 python3 task2.py
 ```
+
+### Task 3
+__reverse_index.json__ - файл с индексом в формате json
+
+__Запуск__
+```bash
+python3 task3.py
+```

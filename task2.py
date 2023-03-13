@@ -8,9 +8,10 @@ import re
 nltk.download('punkt')
 nltk.download('stopwords')
 
+
 # Функция очистки текста
 def prepare_token(token):
-    return re.sub("[^а-яА-Я-]", '', token)
+    return re.sub("[^а-яА-ЯёЁ-]", '', token)
 
 
 # Собираем весь текст из страниц
