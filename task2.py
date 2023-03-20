@@ -20,6 +20,7 @@ for html_page in os.listdir('plain_pages/'):
     file = open('plain_pages/' + html_page)
     lines = file.readlines()
     text += '\n'.join(lines)
+    text += '\n'
 
 # Извлекаем токены
 tokens = word_tokenize(text, language='russian')

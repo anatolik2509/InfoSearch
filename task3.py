@@ -15,6 +15,7 @@ def read_lemma_tokens() -> Dict[str, str]:
     with open('lemma_tokens.txt') as lemma_file:
         lines = lemma_file.readlines()
         for line in lines:
+            line = line.rstrip('\n')
             words = line.split(' ')
             for word in words:
                 lemmas[word] = words[0]
@@ -48,9 +49,11 @@ def build_index():
             if lemma is None:
                 continue
             if lemma not in reverse_index:
-                reverse_index[lemma] = []
-            reverse_index[lemma].append(text_page)
+                reverse_index[lemma] = set()
+            reverse_index[lemma].add(text_page)
         file.close()
+    for key in reverse_index.keys():
+        reverse_index[key] = list(reverse_index[key])
     json_reverse_index = json.dumps(reverse_index, ensure_ascii=False)
     with open('reverse_index.json', 'w+') as index_file:
         index_file.write(json_reverse_index)

@@ -26,3 +26,12 @@ __Запуск__
 ```bash
 python3 task3.py
 ```
+
+### Task 4
+__tfidf/__ - файлы с tfidf \
+__lemma_tfidf/__ - файлы с tfidf лемм
+
+__Запуск__
+```bash
+python3 task3.py
+```
