@@ -87,11 +87,11 @@ def calculate_lemma_tf(lemma: str, docs: Dict[str, List[str]]) -> Dict[str, floa
     for doc, text in docs.items():
         if len(text) == 0:
             continue
-        if token not in text:
+        if lemma not in text:
             continue
         entries = 0.0
         for word in text:
-            if word == token:
+            if word == lemma:
                 entries += 1
         result[doc] = entries / len(text)
     return result
@@ -132,14 +132,19 @@ if __name__ == '__main__':
     for doc, text in doc_to_token.items():
         doc_to_token[doc] = list(map(lambda token: token_to_lemma[token], text))
 
+    lemma_to_tf = {}
+    lemma_to_idf = {}
+
     for token in tokens:
-        token_to_tf[token] = calculate_lemma_tf(token_to_lemma[token], doc_to_token)
-        token_to_idf[token] = calculate_lemma_idf(token_to_lemma[token], len(doc_to_token), index)
+        lemma = token_to_lemma[token]
+        lemma_to_tf[lemma] = calculate_lemma_tf(token_to_lemma[token], doc_to_token)
+        lemma_to_idf[lemma] = calculate_lemma_idf(token_to_lemma[token], len(doc_to_token), index)
     for page in get_all_docs():
         with open('lemma_tfidf/' + page, "w+") as tfidf_file:
             for token in tokens:
-                if page not in token_to_tf[token]:
+                lemma = token_to_lemma[token]
+                if page not in lemma_to_tf[lemma]:
                     continue
-                tfidf_file.write(f'{token} {token_to_idf[token]} {token_to_idf[token] * token_to_tf[token][page]}\n')
+                tfidf_file.write(f'{lemma} {lemma_to_idf[lemma]} {lemma_to_idf[lemma] * lemma_to_tf[lemma][page]}\n')
 
 
